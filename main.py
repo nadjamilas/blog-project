@@ -11,7 +11,21 @@ from flask_gravatar import Gravatar
 from functools import wraps
 import sys
 import os
+import psycopg2
 sys.setrecursionlimit(10000)
+#
+# # Connect to your postgres DB
+# conn = psycopg2.connect("dbname=test user=postgres")
+#
+# # Open a cursor to perform database operations
+# cur = conn.cursor()
+#
+# # Execute a query
+# cur.execute("SELECT * FROM my_data")
+#
+# # Retrieve query results
+# records = cur.fetchall()
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
@@ -83,7 +97,7 @@ def admin_only(f):
     return decorated_function
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def get_all_posts():
     posts = BlogPost.query.all()
     users = User.query.all()
