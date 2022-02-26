@@ -28,7 +28,9 @@
           <hr>
 
             <div class="clearfix">
+              {% if current_user.id == 1 %}
             <a class="btn btn-primary float-right" href="{{url_for('edit_post', post_id=post.id)}}">Edit Post</a>
+              {% endif %}
             </div>
 
 
