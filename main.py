@@ -23,7 +23,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///blog.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///blog.db')
 uri = os.getenv("DATABASE_URL",  'sqlite:///blog.db')  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
@@ -54,7 +54,7 @@ class User(UserMixin, db.Model):
     #The "author" refers to the author property in the BlogPost class.
     posts = relationship("BlogPost", back_populates="author")
     comments = relationship("Comment", back_populates="comment_author")
-db.create_all()
+# db.create_all()
 
 ##CONFIGURE TABLES
 class BlogPost(db.Model):
@@ -68,7 +68,7 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
     comments = relationship("Comment", back_populates="parent_post")
-db.create_all()
+# db.create_all()
 
 ##Coment table
 class Comment(db.Model):
@@ -79,7 +79,7 @@ class Comment(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     parent_post = relationship("BlogPost", back_populates="comments")
     post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
-db.create_all()
+# db.create_all()
 
 ## Admin only decorator
 def admin_only(f):
