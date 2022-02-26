@@ -11,20 +11,9 @@ from flask_gravatar import Gravatar
 from functools import wraps
 import sys
 import os
-import psycopg2
+
 sys.setrecursionlimit(10000)
-#
-# # Connect to your postgres DB
-# conn = psycopg2.connect("dbname=test user=postgres")
-#
-# # Open a cursor to perform database operations
-# cur = conn.cursor()
-#
-# # Execute a query
-# cur.execute("SELECT * FROM my_data")
-#
-# # Retrieve query results
-# records = cur.fetchall()
+
 
 
 app = Flask(__name__)
@@ -34,6 +23,7 @@ Bootstrap(app)
 
 ##CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///blog.db')
+app.config['SQLALCHEMY_DATABASE_URI1'] = os.environ.get('postgresql://tbowxfpkluoveu:47965e36c8441afe96d26f39f7e715c943db9735ccfe47e1b01754656313e6a7@ec2-52-70-186-184.compute-1.amazonaws.com:5432/dcqv0t63jicsku')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
