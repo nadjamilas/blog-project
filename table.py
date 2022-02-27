@@ -1,7 +1,3 @@
+from flask import Flask, render_template, redirect, url_for, flash, request, abort
 from main import db
-
-def create_table_if_not_exist():
-    try:
-        db.create_all()
-    except:
-        return "Table exist"
+db.create_all()
