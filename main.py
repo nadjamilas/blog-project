@@ -29,7 +29,7 @@ Bootstrap(app)
 
 ##CONNECT TO DB
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///blog.db')
-uri = os.getenv("DATABASE_URL",  'sqlite:///blog.db')  # or other relevant config var
+uri = os.getenv("HEROKU_POSTGRESQL_ONYX_URL",  'sqlite:///blog.db')  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 # rest of connection code using the connection string `uri`
